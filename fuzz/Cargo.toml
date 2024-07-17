@@ -35,6 +35,10 @@ name = "roundtrip_xz"
 path = "fuzz_targets/roundtrip_xz.rs"
 
 [[bin]]
+name = "roundtrip_lzip"
+path = "fuzz_targets/roundtrip_lzip.rs"
+
+[[bin]]
 name = "decompress_lzma"
 path = "fuzz_targets/decompress_lzma.rs"
 

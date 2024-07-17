@@ -1,4 +1,4 @@
-//! Pure-Rust codecs for LZMA, LZMA2, and XZ.
+//! Pure-Rust codecs for LZMA, LZMA2, XZ, and lzip.
 #![cfg_attr(docsrs, feature(doc_cfg, doc_cfg_hide))]
 #![deny(missing_docs)]
 #![deny(missing_debug_implementations)]
@@ -12,6 +12,7 @@ mod encode;
 
 pub mod error;
 
+mod lzip;
 mod util;
 mod xz;
 
@@ -107,4 +108,22 @@ pub fn xz_decompress<R: io::BufRead, W: io::Write>(
 /// Compress data with XZ and default [`Options`](compress/struct.Options.html).
 pub fn xz_compress<R: io::BufRead, W: io::Write>(input: &mut R, output: &mut W) -> io::Result<()> {
     encode::xz::encode_stream(input, output)
+}
+
+/// Decompress lzip data with default
+/// [`Options`](decompress/struct.Options.html).
+pub fn lzip_decompress<R: io::BufRead, W: io::Write>(
+    input: &mut R,
+    output: &mut W,
+) -> error::Result<()> {
+    decode::lzip::decode_stream(input, output)
+}
+
+/// Compress data with lzip and default
+/// [`Options`](compress/struct.Options.html).
+pub fn lzip_compress<R: io::BufRead, W: io::Write>(
+    input: &mut R,
+    output: &mut W,
+) -> io::Result<()> {
+    encode::lzip::encode_stream(input, output)
 }

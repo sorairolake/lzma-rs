@@ -79,7 +79,6 @@ pub struct LzmaParams {
 
 impl LzmaParams {
     /// Create an new instance of LZMA parameters.
-    #[cfg(feature = "raw_decoder")]
     pub fn new(
         properties: LzmaProperties,
         dict_size: u32,

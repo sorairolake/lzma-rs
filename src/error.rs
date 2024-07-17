@@ -14,6 +14,8 @@ pub enum Error {
     LzmaError(String),
     /// XZ error.
     XzError(String),
+    /// lzip error.
+    LzipError(String),
 }
 
 /// Library result alias.
@@ -32,6 +34,7 @@ impl Display for Error {
             Error::HeaderTooShort(e) => write!(fmt, "header too short: {}", e),
             Error::LzmaError(e) => write!(fmt, "lzma error: {}", e),
             Error::XzError(e) => write!(fmt, "xz error: {}", e),
+            Error::LzipError(e) => write!(fmt, "lzip error: {}", e),
         }
     }
 }
@@ -40,7 +43,7 @@ impl std::error::Error for Error {
     fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
         match self {
             Error::IoError(e) | Error::HeaderTooShort(e) => Some(e),
-            Error::LzmaError(_) | Error::XzError(_) => None,
+            Error::LzmaError(_) | Error::XzError(_) | Error::LzipError(_) => None,
         }
     }
 }
@@ -66,6 +69,10 @@ mod test {
         assert_eq!(
             Error::XzError("this is an error".to_string()).to_string(),
             "xz error: this is an error"
+        );
+        assert_eq!(
+            Error::LzipError("this is an error".to_string()).to_string(),
+            "lzip error: this is an error"
         );
     }
 }

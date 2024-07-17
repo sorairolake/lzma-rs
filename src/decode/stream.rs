@@ -299,7 +299,7 @@ where
                         Err(e) => {
                             return Err(match e {
                                 Error::IoError(e) | Error::HeaderTooShort(e) => e,
-                                Error::LzmaError(e) | Error::XzError(e) => {
+                                Error::LzmaError(e) | Error::XzError(e) | Error::LzipError(e) => {
                                     io::Error::new(io::ErrorKind::Other, e)
                                 }
                             });

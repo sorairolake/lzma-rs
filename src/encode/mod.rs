@@ -1,6 +1,7 @@
 //! Encoding logic.
 
 pub mod dumbencoder;
+pub mod lzip;
 pub mod lzma2;
 pub mod options;
 mod rangecoder;

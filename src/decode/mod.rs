@@ -1,6 +1,7 @@
 //! Decoding logic.
 
 pub mod lzbuffer;
+pub mod lzip;
 pub mod lzma;
 pub mod lzma2;
 pub mod options;
